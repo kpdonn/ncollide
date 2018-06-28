@@ -1,11 +1,11 @@
 use na::{self, Real};
 
-use math::{Isometry, Point};
-use utils::{IdAllocator, IsometryOps};
-use shape::{Ball, FeatureId, Plane, Shape};
 use bounding_volume::PolyhedralCone;
-use query::{Contact, ContactKinematic, ContactManifold, ContactPrediction};
+use math::{Isometry, Point};
 use pipeline::narrow_phase::{ContactDispatcher, ContactManifoldGenerator};
+use query::{Contact, ContactKinematic, ContactManifold, ContactPrediction};
+use shape::{Ball, FeatureId, Plane, Shape};
+use utils::{IdAllocator, IsometryOps};
 
 /// Collision detector between g1 plane and g1 shape implementing the `SupportMap` trait.
 #[derive(Clone)]
@@ -36,10 +36,7 @@ impl<N: Real> PlaneBallManifoldGenerator<N> {
         id_alloc: &mut IdAllocator,
         flip: bool,
     ) -> bool {
-        if let (Some(plane), Some(ball)) = (
-            g1.as_shape::<Plane<N>>(),
-            g2.as_shape::<Ball<N>>(),
-        ) {
+        if let (Some(plane), Some(ball)) = (g1.as_shape::<Plane<N>>(), g2.as_shape::<Ball<N>>()) {
             self.manifold.save_cache_and_clear(id_alloc);
 
             let plane_normal = m1 * plane.normal();

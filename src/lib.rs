@@ -41,7 +41,6 @@ And various traits for collision detectors and broad phase collision detection.
 #![deny(unused_parens)]
 #![deny(non_upper_case_globals)]
 #![deny(unused_qualifications)]
-#![deny(missing_docs)]
 #![deny(unused_results)]
 #![warn(unused_imports)]
 #![allow(missing_copy_implementations)]
@@ -55,16 +54,18 @@ extern crate nalgebra as na;
 extern crate num_traits as num;
 extern crate smallvec;
 
+extern crate js_func;
+
 pub use pipeline::{broad_phase, events, narrow_phase, world};
 
-pub mod utils;
-pub mod shape;
 pub mod bounding_volume;
 pub mod partitioning;
-pub mod query;
-pub mod procedural;
-pub mod transformation;
 mod pipeline;
+pub mod procedural;
+pub mod query;
+pub mod shape;
+pub mod transformation;
+pub mod utils;
 
 /// Compilation flags dependent aliases for mathematical types.
 #[cfg(feature = "dim3")]

@@ -1,32 +1,24 @@
 use na::Real;
+use pipeline::narrow_phase::{
+    BallBallManifoldGenerator, BallConvexPolyhedronManifoldGenerator,
+    CompositeShapeShapeManifoldGenerator, ContactAlgorithm, ContactDispatcher,
+    ConvexPolyhedronConvexPolyhedronManifoldGenerator, PlaneBallManifoldGenerator,
+    PlaneConvexPolyhedronManifoldGenerator,
+};
 use shape::{Ball, Plane, Shape};
-use pipeline::narrow_phase::{BallBallManifoldGenerator,
-                   BallConvexPolyhedronManifoldGenerator,
-                   CompositeShapeShapeManifoldGenerator,
-                   ContactAlgorithm,
-                   ContactDispatcher,
-                   ConvexPolyhedronConvexPolyhedronManifoldGenerator,
-                   PlaneBallManifoldGenerator,
-                   PlaneConvexPolyhedronManifoldGenerator};
 
 /// Collision dispatcher for shapes defined by `ncollide_entities`.
-pub struct DefaultContactDispatcher {
-}
+pub struct DefaultContactDispatcher {}
 
 impl DefaultContactDispatcher {
     /// Creates a new basic collision dispatcher.
     pub fn new() -> DefaultContactDispatcher {
-        DefaultContactDispatcher {
-        }
+        DefaultContactDispatcher {}
     }
 }
 
 impl<N: Real> ContactDispatcher<N> for DefaultContactDispatcher {
-    fn get_contact_algorithm(
-        &self,
-        a: &Shape<N>,
-        b: &Shape<N>,
-    ) -> Option<ContactAlgorithm<N>> {
+    fn get_contact_algorithm(&self, a: &Shape<N>, b: &Shape<N>) -> Option<ContactAlgorithm<N>> {
         let a_is_ball = a.is_shape::<Ball<N>>();
         let b_is_ball = b.is_shape::<Ball<N>>();
         let a_is_plane = a.is_shape::<Plane<N>>();

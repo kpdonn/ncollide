@@ -20,6 +20,8 @@ name = "ncollide2d"
 path = "../../src/lib.rs"
 
 [dependencies]
+js_func = { path = "/Users/kevindonnelly/workspace/slime_volleyball/js_func"  }
+
 num-traits      = "0.1"
 smallvec        = "0.6"
 slab            = "0.4"
