@@ -3,7 +3,7 @@ use pipeline::narrow_phase::{
     BallBallManifoldGenerator, BallConvexPolyhedronManifoldGenerator,
     CompositeShapeShapeManifoldGenerator, ContactAlgorithm, ContactDispatcher,
     ConvexPolyhedronConvexPolyhedronManifoldGenerator, PlaneBallManifoldGenerator,
-    PlaneConvexPolyhedronManifoldGenerator,
+    PlaneConvexPolyhedronManifoldGenerator, SupportMapSupportMapManifoldGenerator,
 };
 use shape::{Ball, Plane, Shape};
 
@@ -44,6 +44,9 @@ impl<N: Real> ContactDispatcher<N> for DefaultContactDispatcher {
             Some(Box::new(gen))
         } else if a.is_convex_polyhedron() && b.is_convex_polyhedron() {
             let gen = ConvexPolyhedronConvexPolyhedronManifoldGenerator::new();
+            Some(Box::new(gen))
+        } else if a.is_support_map() && b.is_support_map() {
+            let gen = SupportMapSupportMapManifoldGenerator::new();
             Some(Box::new(gen))
         } else if a.is_composite_shape() {
             Some(Box::new(CompositeShapeShapeManifoldGenerator::<N>::new(
